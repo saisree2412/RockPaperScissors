@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<script>
+    let playerScore = 0;
+    let computerScore = 0;
+    game();
+    function game(){
+        
+        playRound();
+        playRound();
+        playRound();
+        playRound();
+        playRound();
+        console.log(playerScore);
+        console.log(computerScore);
+        if(playerScore > computerScore){
+            console.log("You won");
+        }
+        else if(computerScore > playerScore){
+            console.log("Computer won");
+        }
+        else{
+            console.log("It's a tie");
+        }
+
+
+    }
+    function getComputerChoice(){
+        var textArray = [
+    'rock',
+    'paper',
+    'scissor'
+];
+var randomNumber = Math.floor(Math.random()*textArray.length);
+
+return textArray[randomNumber];
+    }
+
+    function playRound(){
+        const computerSelection = getComputerChoice();
+        const playerSelection = prompt("select from rock,paper, scissors");
+        if(computerSelection == "rock" && playerSelection == "scissor" || computerSelection == "paper" && playerSelection == "rock" || computerSelection == "scissor" && playerSelection == "paper"  ){
+            computerScore = computerScore + 1;
+        }
+        else if(computerSelection == playerSelection){
+            
+        }
+        else{
+            playerScore = playerScore+ 1;
+        }
+    }
+</script>
+
+<body>
+    
+</body>
+</html>

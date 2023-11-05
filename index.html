@@ -6,28 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
 </head>
+
+
+<body>
+    <button id='rock' onclick="playRound('rock')">Rock</button>
+    <button id='paper' onclick="playRound('paper')">Paper</button>
+    <button id='scissor' onclick="playRound('scissor')">Scissors</button>
+    <div>
+
+    </div>
 <script>
+    let roundsLeft = 5;
     let playerScore = 0;
     let computerScore = 0;
-    game();
+    
+    const playerPara = document.createElement('p');
+    const computerPara = document.createElement('p');
+    const container = document.querySelector('div');
+    
+    container.appendChild(playerPara);
+    container.appendChild(computerPara);
+
+    function updateScores() {
+        playerPara.textContent = `Player Score: ${playerScore}`;
+        computerPara.textContent = `Computer Score: ${computerScore}`;
+    }
+    
     function game(){
-        
-        playRound();
-        playRound();
-        playRound();
-        playRound();
-        playRound();
-        console.log(playerScore);
-        console.log(computerScore);
-        if(playerScore > computerScore){
-            console.log("You won");
+        if(roundsLeft === 0){
+            const resultPara = document.createElement('p');
+            container.appendChild(resultPara);
+            if(playerScore > computerScore){
+            resultPara.textContent="You won";
         }
         else if(computerScore > playerScore){
-            console.log("Computer won");
+            resultPara.textContent="Computer won";
         }
         else{
-            console.log("It's a tie");
+            resultPara.textContent="It's tie";
         }
+
+        }
+        
 
 
     }
@@ -42,9 +62,8 @@ var randomNumber = Math.floor(Math.random()*textArray.length);
 return textArray[randomNumber];
     }
 
-    function playRound(){
+    function playRound(playerSelection){
         const computerSelection = getComputerChoice();
-        const playerSelection = prompt("select from rock,paper, scissors");
         if(computerSelection == "rock" && playerSelection == "scissor" || computerSelection == "paper" && playerSelection == "rock" || computerSelection == "scissor" && playerSelection == "paper"  ){
             computerScore = computerScore + 1;
         }
@@ -54,10 +73,14 @@ return textArray[randomNumber];
         else{
             playerScore = playerScore+ 1;
         }
-    }
-</script>
+        roundsLeft--;
+        
+        updateScores();
+        game();
 
-<body>
+    }
+    
+</script>
     
 </body>
 </html>
